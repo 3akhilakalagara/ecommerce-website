@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h3>All Products</h3>
+
+<table class="table table-bordered">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Price</th>
+<th>Stock</th>
+</tr>
+
+{% for p in products %}
+<tr>
+<td>{{p[0]}}</td>
+<td>{{p[1]}}</td>
+<td>{{p[3]}}</td>
+<td>{{p[5]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

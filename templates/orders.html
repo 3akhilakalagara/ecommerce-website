@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+.order-card{
+  transition: all 0.3s ease;
+}
+.order-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.fade-in{
+  animation: fade 0.6s ease-in-out;
+}
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+
+<div class="container py-4 fade-in">
+
+<h3 class="fw-bold mb-4">📦 Your Orders</h3>
+
+{% if orders and orders|length > 0 %}
+<div class="row">
+
+{% for o in orders %}
+<div class="col-md-4 mb-3">
+    <div class="card order-card border-0 shadow-sm p-2">
+        <div class="card-body">
+
+            <h6 class="text-muted mb-1">
+                Order ID: <strong>{{ o[0] }}</strong>
+            </h6>
+
+            <h5 class="fw-semibold">
+                <i class="bi bi-box-seam"></i> {{ o[1] }}
+            </h5>
+
+            <p class="mb-1">
+                <i class="bi bi-calendar-check"></i>
+                Order Date: {{ o[3] if o|length > 3 and o[3] else today }}
+            </p>
+
+            <p class="fw-bold text-success">
+                <i class="bi bi-currency-rupee"></i>
+                {{ o[4] if o|length > 4 else "—" }}
+            </p>
+
+            {% if o[2]|lower == 'delivered' %}
+                <span class="badge bg-success px-3 py-2">
+                    <i class="bi bi-check-circle"></i> Delivered
+                </span>
+            {% elif o[2]|lower == 'shipped' %}
+                <span class="badge bg-primary px-3 py-2">
+                    <i class="bi bi-truck"></i> Shipped
+                </span>
+            {% elif o[2]|lower == 'processing' %}
+                <span class="badge bg-warning text-dark px-3 py-2">
+                    <i class="bi bi-hourglass-split"></i> Processing
+                </span>
+            {% else %}
+                <span class="badge bg-secondary px-3 py-2">{{ o[2] }}</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+{% else %}
+<div class="text-center py-5">
+    <h5>No Orders Found 😔</h5>
+    <p class="text-muted">You haven’t placed any orders yet.</p>
+    <a href="/" class="btn btn-primary">Start Shopping</a>
+</div>
+{% endif %}
+
+</div>
+
+{% endblock %}
+

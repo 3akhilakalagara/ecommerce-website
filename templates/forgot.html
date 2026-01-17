@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h3 class="text-center">Forgot Password</h3>
+<form method="post" class="col-md-5 mx-auto">
+<label>Email</label>
+<input type="email" name="email" class="form-control" required>
+<button class="btn btn-warning w-100 mt-3">Send Reset Link</button>
+</form>
+{% endblock %}

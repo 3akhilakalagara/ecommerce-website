@@ -1,0 +1,39 @@
+body{
+ background:#f8f9fa;
+}
+.card{
+ border-radius:10px;
+}
+
+.product-card{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,.15);
+}
+
+/* uniform image size */
+.product-card img{
+    height: 180px;
+    object-fit: contain;
+    background:#fff;
+    padding:10px;
+}
+
+/* allow body to stretch */
+.product-card .card-body{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* control description height */
+.product-desc{
+    min-height: 55px;
+}
+
+/* keep buttons aligned bottom */
+.product-actions{
+    margin-top: auto;
+}

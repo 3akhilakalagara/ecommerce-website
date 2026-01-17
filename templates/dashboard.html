@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+.product-card{
+  border:none;
+  border-radius:12px;
+  overflow:hidden;
+  background:white;
+  transition:all .3s ease;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img{
+   height:190px;
+   object-fit:cover;
+   border-radius:10px;
+}
+
+.product-desc{
+    font-size:14px;
+    height:42px;
+    overflow:hidden;
+    color:#666;
+}
+
+.product-price{
+    font-size:18px;
+    font-weight:700;
+}
+
+.stock{
+    font-size:14px;
+    color:#28a745;
+}
+
+.rating{
+  font-weight:600;
+  color:#ff9f00;
+}
+
+.btn-custom{
+    border-radius:8px;
+}
+</style>
+
+
+<h3 class="text-center fw-bold mb-4">
+    🛍️ All Products
+</h3>
+
+<div class="row">
+{% for p in products %}
+<div class="col-md-3 mb-4">
+
+<div class="card product-card p-2">
+
+<img src="/static/uploads/{{p[6]}}" class="card-img-top">
+
+<div class="card-body">
+
+<h5 class="fw-bold">{{p[1]}}</h5>
+
+<p class="product-desc">{{p[2][:80]}}...</p>
+
+<p class="product-price text-primary">
+    ₹ {{p[3]}}
+</p>
+
+<p class="rating">
+    {% set rating = p[4]|float %}
+    {% set full = rating|int %}
+    {% set half = 1 if rating - full >= 0.5 else 0 %}
+    {% set empty = 5 - full - half %}
+
+    {% for i in range(full) %}
+        <i class="bi bi-star-fill text-warning"></i>
+    {% endfor %}
+
+    {% if half %}
+        <i class="bi bi-star-half text-warning"></i>
+    {% endif %}
+
+    {% for i in range(empty) %}
+        <i class="bi bi-star text-warning"></i>
+    {% endfor %}
+</p>
+
+
+<p class="stock">
+    In Stock: {{p[5]}}
+</p>
+
+<a href="/add_to_cart/{{p[0]}}" class="btn btn-primary w-100 mb-2 btn-custom">
+    <i class="bi bi-cart-plus"></i> Add to Cart
+</a>
+
+<a href="/favourite/{{p[0]}}" class="btn btn-outline-danger w-100 btn-custom">
+    <i class="bi bi-heart"></i> Add to Favourites
+</a>
+
+</div>
+</div>
+
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
+
